@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+	<title>Long Strings</title>
+	<style type="text/css">
+		.container {width: 800px; height: 400px; margin: 200px auto 0;}
+		#string-box {width: 110px; height: 32px; position: relative; z-index: 0;background-color: #7660a2;padding: 0 10px; border-radius: 3px;}
+		#string-box p {text-decoration: none; color: #fff; font-family: sans-serif; line-height: 32px; font-size: 1.2em; cursor: pointer;}
+
+		.email {font-family: sans-serif; margin-top: 5px; font-size: 1.6em; max-width: 240px; overflow: hidden; position: relative; max-height: 135px; min-height: 25px; float: left; line-height: 1.3em; text-align: left; background-color: #7660a2; color: #fff;}
+		.email span {display: inline-block; width: auto; position: relative;}
+	</style>
+	<script type="text/javascript">
+	$(document).ready(function()
+	{
+		var temp = $('#string-box p').text();
+        var c = [];
+        c[0] = (temp.match(/w/g) !=null) ? temp.match(/w/g).length : 0;
+        c[1] = (temp.match(/m/g) !=null) ? temp.match(/m/g).length : 0;
+        c[2] = (temp.match(/k/g) !=null) ? temp.match(/k/g).length : 0;
+        c[3] = (temp.match(/x/g) !=null) ? temp.match(/x/g).length : 0;
+        c[4] = (temp.match(/i/g) !=null) ? temp.match(/i/g).length : 0;
+        c[5] = (temp.match(/l/g) !=null) ? temp.match(/l/g).length : 0;
+        c[6] = (temp.match(/r/g) !=null) ? temp.match(/r/g).length : 0;
+        c[7] = (temp.match(/j/g) !=null) ? temp.match(/g/g).length : 0;
+
+        var less = c[0] +  c[1] +  c[2] +  c[3] - 2*c[4] -  2*c[5] -  2*c[6] -  2*c[7]; 
+        less = less/3;
+        less = 9-less;
+
+        $('#string-box p').text(temp.substr(0,less) + ' . .');
+
+        var diff = 0;
+        $('.email').hover(
+        function()
+        {
+            diff = $(this).width() - $(this).find('span').width();
+            console.log($(this).width());
+            console.log($(this).find('span').width());
+            if (diff < 0)
+                $(this).find('span').stop().animate({marginLeft:diff},400);
+
+        },
+        function()
+        {
+           $(this).find('span').stop().animate({marginLeft:'0px'},400); 
+        });
+    });
+	</script>
+</head>
+<body>
+<div class="container">
+<div id="string-box">
+	<p>Ali Haghighatkhah</p>
+</div>
+<a class="email" href=""><span>aliHaghighatkhah@yahoo.com</span></a>
+
+</div>
+
+
+</body>
+</html>
